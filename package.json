@@ -4,21 +4,25 @@
   "dependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-scripts": "2.1.2",
     "apollo-server-express": "^2.3.1",
     "express": "^4.16.4",
     "graphql": "^14.0.2",
-    "netatmo": "^2.2.2"
+    "netatmo": "^2.2.2",
+    "apollo-boost": "^0.1.23",
+    "react-apollo": "^2.3.3"
   },
   "devDependencies": {
+    "react-scripts": "2.1.2",
     "basic-ftp": "^2.17.0",
+    "concurrently": "^4.1.0",
     "progress-estimator": "^0.2.2",
     "shelljs": "^0.8.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node src/server/server.js",
     "build": "react-scripts build",
-    "dev": "node -r dotenv/config src/server/server.js"
+    "dev": "concurrently -k \"node -r dotenv/config src/server/server.js\" \"react-scripts start\"",
+    "deploy": "react-scripts build && node script/deploy.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -28,5 +32,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "proxy": "http://localhost:4000"
 }

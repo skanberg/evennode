@@ -10,14 +10,12 @@ const typeDefs = gql`
   }
 
   type Query {
-    hello: String
     temp: Temp
   }
 `;
 
 const resolvers = {
   Query: {
-    hello: () => "world",
     temp: () => temp()
   }
 };
@@ -38,4 +36,4 @@ apollo.applyMiddleware({ app: server });
 server.use(express.static("public"));
 server.get("/api", (req, res) => res.json({ result: true }));
 
-server.listen(process.env.PORT, () => console.log(`Server started`));
+server.listen(process.env.PORT || 4000, () => console.log(`Server started`));
